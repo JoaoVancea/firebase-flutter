@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_cadastro/User/controller/authentication_service.dart';
 import 'package:login_cadastro/User/controller/user_controller.dart';
-import 'package:login_cadastro/User/database/user_database.dart';
-import 'package:login_cadastro/User/model/user_model.dart';
-import 'package:login_cadastro/ui/pages/HomePage.dart';
-import 'package:login_cadastro/ui/pages/login.dart';
 import 'package:login_cadastro/ui/widgets/show_snackbar.dart';
 
 class Cadastro extends StatelessWidget {
@@ -17,7 +13,7 @@ class Cadastro extends StatelessWidget {
   final confirmarSenhaController = TextEditingController();
 
   AuthenticationService _authenticationService = AuthenticationService();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,20 +93,7 @@ class Cadastro extends StatelessWidget {
                               context: context,
                               texto: 'Cadastro efetuado com sucesso!',
                               isErro: false);
-                              
-                          // Navigator.pushAndRemoveUntil(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (_) => Login(
-                          //           newUser: UserModel(
-                          //               name: nomeController.text,
-                          //               email: emailController.text,
-                          //               password: senhaController.text))),
-                          //   (route) => false,
-                          // );
-
-                          _authenticationService.loginUsuario(email: emailController.text, password: senhaController.text);
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
+                          Navigator.pop(context);
                         }
                       });
                     }

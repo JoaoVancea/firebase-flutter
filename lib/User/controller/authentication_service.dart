@@ -1,7 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -16,6 +13,7 @@ class AuthenticationService {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       await userCredential.user!.updateDisplayName(name);
+      loginUsuario(email: email, password: password);
 
       return null;
     } on FirebaseAuthException catch (e) {

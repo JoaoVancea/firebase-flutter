@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Logar com ',
+                    const Text('Entrar com ',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     Image.asset('google-logo.png', width: 30, height: 20,),
                   ],
