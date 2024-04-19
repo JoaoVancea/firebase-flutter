@@ -73,21 +73,21 @@ class _LoginState extends State<Login> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  _authenticationService
-                      .loginUsuario(
-                          email: emailController.text,
-                          password: senhaController.text)
-                      .then((String? erro) {
-                    if (erro != null) {
-                      showSnackBar(context: context, texto: erro);
-                    } else {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_) => HomePage()),
-                        (route) => false,
-                      );
-                    }
-                  });
+                  if (emailController.text.isNotEmpty &&
+                      senhaController.text.isNotEmpty) {
+                    _authenticationService
+                        .loginUsuario(
+                            email: emailController.text,
+                            password: senhaController.text)
+                        .then((String? erro) {
+                      if (erro != null) {
+                        showSnackBar(context: context, texto: erro);
+                      } 
+                    });
+                  } else {
+                    showSnackBar(
+                        context: context, texto: 'Preencha todos os campos');
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 255, 103, 1),
@@ -98,6 +98,39 @@ class _LoginState extends State<Login> {
                 child: const Text(
                   'Login',
                   style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: 1000,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  _authenticationService.singInWithGoogle().then((String? erro) {
+                    if (erro != null) {
+                      showSnackBar(context: context, texto: erro);
+                    }
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    alignment: Alignment.center,
+                    backgroundColor: Colors.white,
+                    foregroundColor: const Color.fromARGB(255, 255, 103, 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(
+                            width: 1.0,
+                            color: Color.fromARGB(255, 255, 103, 1)))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Logar com ',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Image.asset('google-logo.png', width: 30, height: 20,),
+                  ],
                 ),
               ),
             ),

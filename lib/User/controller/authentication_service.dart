@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -48,5 +50,15 @@ class AuthenticationService {
 
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
+  }
+
+  Future<String?> singInWithGoogle() async {
+    try {
+      GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+      await _firebaseAuth.signInWithPopup(googleAuthProvider);
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return (e.message);
+    }
   }
 }

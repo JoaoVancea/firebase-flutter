@@ -29,6 +29,6 @@ class RoteadorTela extends StatelessWidget {
       } else {
         return Login();
       }
-    },);
+    });
   }
 }
